@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 
 import java.util.Collections;
 import java.util.List;
@@ -126,10 +127,13 @@ public class ProductControllerTest {
 
         Product product = new Product();
         Product productCreated = new Product();
+        BindingResult bindingResult = mock(BindingResult.class);
+
+        when(bindingResult.hasErrors()).thenReturn(false);
 
         when(productService.createProduct(product)).thenReturn(productCreated);
 
-        ResponseEntity<Product> response = productController.createProduct(product);
+        ResponseEntity<Product> response = productController.createProduct(product, bindingResult);
 
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         Assertions.assertThat(response.getBody()).isEqualTo(productCreated);
