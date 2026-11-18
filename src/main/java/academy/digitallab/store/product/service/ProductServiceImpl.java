@@ -4,8 +4,9 @@ import academy.digitallab.store.product.entity.Category;
 import academy.digitallab.store.product.entity.Product;
 import academy.digitallab.store.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 import java.util.Date;
 import java.util.List;
