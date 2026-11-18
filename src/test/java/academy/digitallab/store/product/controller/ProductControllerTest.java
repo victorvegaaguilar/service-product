@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -35,6 +36,19 @@ public class ProductControllerTest {
 
         Assertions.assertThat(HttpStatus.OK).isEqualTo(response.getStatusCode());
         Assertions.assertThat(products).isEqualTo(response.getBody());
+
+        verify(productService, times(1)).listAllProduct();
+    }
+
+    @Test
+    public void listProduct_shouldReturnNoContent_whenProductsEmpty() {
+
+        when(productService.listAllProduct()).thenReturn(Collections.emptyList());
+
+        ResponseEntity<List<Product>> response = productController.listProduct();
+
+        Assertions.assertThat(HttpStatus.NO_CONTENT).isEqualTo(response.getStatusCode());
+        Assertions.assertThat(response.getBody()).isNull();
 
         verify(productService, times(1)).listAllProduct();
     }
