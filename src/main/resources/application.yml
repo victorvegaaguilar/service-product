@@ -27,6 +27,9 @@ spring:
       hibernate:
         use_sql_comments: false
         format_sql: false
+  web:
+    error:
+      include-message: always
 
 logging:
   pattern:
